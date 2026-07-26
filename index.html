@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>狼波周期指数 · Wolfy Wave Index</title>
+  <title>区块脉冲指数 · Block Pulse Index</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23EC2626'/%3E%3Cstop offset='.15' stop-color='%23F69C1C'/%3E%3Cstop offset='.3' stop-color='%23D6DF38'/%3E%3Cstop offset='.5' stop-color='%2348BE50'/%3E%3Cstop offset='.75' stop-color='%233EC4E9'/%3E%3Cstop offset='1' stop-color='%23263CDB'/%3E%3C/linearGradient%3E%3Crect width='32' height='32' rx='5' fill='url(%23g)'/%3E%3C/svg%3E">
   <!-- 主屏图标：iOS「添加到主屏幕」只认 PNG 的 apple-touch-icon（不支持
-       SVG，也不读 data: URI）；Android 走 manifest 里的 PNG 图标 -->
+        SVG，也不读 data: URI）；Android 走 manifest 里的 PNG 图标 -->
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta name="apple-mobile-web-app-title" content="Wolfy Wave">
+  <meta name="apple-mobile-web-app-title" content="Block Pulse">
   <meta name="theme-color" content="#0e1117">
   <link rel="stylesheet" href="css/style.css">
   <!-- Google tag (gtag.js) -->
@@ -26,7 +26,7 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <!-- 品牌标记：狼波色谱六个主色锚点的垂直渐变（1=牛顶红在上，0=熊底蓝在下），
+      <!-- 品牌标记：脉冲色谱六个主色锚点的垂直渐变（1=牛顶红在上，0=熊底蓝在下），
            渐变位置 = 1 - 指数值，与右侧色标同一映射 -->
       <svg class="brand-mark" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
         <defs>
@@ -42,7 +42,7 @@
         <rect width="32" height="32" rx="5" fill="url(#brand-grad)"/>
       </svg>
       <div class="brand-text">
-        <div class="brand-name" id="brand-name">Wolfy Wave Index</div>
+        <div class="brand-name" id="brand-name">Block Pulse Index</div>
         <div class="brand-sub" id="brand-sub" hidden></div>
       </div>
     </div>
@@ -53,7 +53,7 @@
         <button data-tf="month">M</button>
       </div>
       <div class="seg" id="style-group" title="Chart type">
-        <button data-style="wave" class="active">Wave</button>
+        <button data-style="wave" class="active">Pulse</button>
         <button data-style="candles">Candles</button>
         <button data-style="line">Line</button>
       </div>
@@ -84,8 +84,8 @@
             <span id="stat-height" class="price">—</span>
           </div>
         </div>
-        <div class="stat" id="stat-wave-cell" title="Wolfy Wave Index · 0 = bear bottom · 1 = bull top">
-          <span class="stat-label"><span id="stat-wave-label">WWI</span><i class="live-dot"></i></span>
+        <div class="stat" id="stat-wave-cell" title="Block Pulse Index · 0 = bear bottom · 1 = bull top">
+          <span class="stat-label"><span id="stat-wave-label">BPI</span><i class="live-dot"></i></span>
           <div class="stat-value">
             <span id="stat-wave" class="price">—</span>
           </div>
@@ -120,13 +120,13 @@
       <div id="legend" class="legend"><b>BTC/USD</b><b id="legend-price" class="legend-val"></b></div>
       <div id="phase-legend" class="legend phase-legend" hidden></div>
       <div id="tooltip" class="chart-tooltip" hidden></div>
-      <button id="phase-toggle" class="phase-toggle active" title="Show/hide Wave Index pane">
+      <button id="phase-toggle" class="phase-toggle active" title="Show/hide Block Pulse Index pane">
         <svg class="icon-collapse" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         <svg class="icon-expand" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>
       </button>
     </div>
 
-    <aside class="wave-scale" id="wave-scale" title="Wave Index color scale">
+    <aside class="wave-scale" id="wave-scale" title="Pulse Index color scale">
       <div class="ws-label" id="ws-top">Top</div>
       <div class="ws-body">
         <div class="ws-bar" id="ws-bar">
@@ -145,7 +145,7 @@
     </div>
 
     <div id="loading" class="loading">
-      <div class="loading-brand" id="loading-brand">Wolfy Wave Index</div>
+      <div class="loading-brand" id="loading-brand">Block Pulse Index</div>
       <div class="loading-spinner"></div>
       <div id="loading-text">Loading market data…</div>
     </div>
@@ -161,7 +161,7 @@
   <div id="about-overlay" class="about-overlay" hidden>
     <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title">
       <div class="about-head">
-        <b id="about-title">Wolfy Wave Index · Methodology</b>
+        <b id="about-title">Block Pulse Index · Methodology</b>
         <button class="icon-btn" id="about-close" aria-label="Close">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
