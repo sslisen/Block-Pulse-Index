@@ -911,3 +911,39 @@ html:not([lang="en"]) .glyph-en { display: none; }
     left: 12px;
   }
 }
+
+/* 顶部致谢横幅 */
+.top-announcement {
+  background: rgba(46, 107, 255, 0.12);
+  border-bottom: 1px solid rgba(46, 107, 255, 0.25);
+  color: var(--text-color, #8b93a1);
+  font-size: 12px;
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.announcement-content a {
+  color: #2e6bff;
+  text-decoration: none;
+}
+
+.announcement-content a:hover {
+  text-decoration: underline;
+}
+
+.announcement-close {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 0 4px;
+}
+
+.announcement-close:hover {
+  opacity: 1;
+}
