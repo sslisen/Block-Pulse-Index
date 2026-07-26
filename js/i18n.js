@@ -1,26 +1,26 @@
 // 轻量中英文字典。t(key, ...args) 取当前语言文案，函数型条目用于带参数拼接。
 export const STRINGS = {
   zh: {
-    brand: '狼波周期指数',
-    brandSub: 'WOLFY WAVE INDEX',
+    brand: '区块脉冲指数',
+    brandSub: 'BLOCK PULSE INDEX',
     tfDay: '日',
     tfWeek: '周',
     tfMonth: '月',
     styleCandles: 'K线',
     styleLine: '折线',
-    styleWave: '狼波着色',
+    styleWave: '脉冲着色',
     log: '对数',
     linear: '线性',
     priceLabel: '比特币价格',
-    waveLabel: '狼波指数',
+    waveLabel: '脉冲指数',
     scaleTop: '牛顶',
     scaleBottom: '熊底',
     halvingTag: (n, d) => `第 ${n} 次减半（${d}）`,
     bull: '牛市',
     bear: '熊市',
-    paneTitleName: '狼波周期指数',
-    statWave: '狼波周期指数',
-    watermark: ['狼波周期指数', '作者：杀破狼 · @wolfyxbt'],
+    paneTitleName: '区块脉冲指数',
+    statWave: '区块脉冲指数',
+    watermark: ['区块脉冲指数', '作者：HashAsh'],
     axisName: '区块高度',
     legendOHLC: ['开', '高', '低', '收'],
     ttBlock: (n) => `区块 ${n}`,
@@ -35,14 +35,14 @@ export const STRINGS = {
     titleScale: '价格坐标',
     titleAnnotHalving: '显示/隐藏减半日标注',
     titleAnnotBands: '显示/隐藏牛/熊市标注',
-    titlePhase: '显示/隐藏狼波指数窗格',
-    titleWaveScale: '狼波指数色标',
+    titlePhase: '显示/隐藏脉冲指数窗格',
+    titleWaveScale: '脉冲指数色标',
     titleAbout: '指标说明',
-    aboutTitle: '狼波周期指数 · 指标说明',
+    aboutTitle: '区块脉冲指数 · 指标说明',
     aboutHtml: `
 <section>
   <h3>概览</h3>
-  <p>狼波周期指数（Wolfy Wave Index，WWI）是一个纯区块制的比特币周期位置指标：不使用价格、成交量或任何链上活动数据，唯一输入是<b>区块高度</b>。指数在 <code>0</code> 与 <code>1</code> 之间往复运行——<code>0</code> = 理论熊市底部，<code>1</code> = 理论牛市顶部。</p>
+  <p>区块脉冲指数（Block Pulse Index，BPI）是一个纯区块制的比特币周期位置指标：不使用价格、成交量或任何链上活动数据，唯一输入是<b>区块高度</b>。指数在 <code>0</code> 与 <code>1</code> 之间往复运行——<code>0</code> = 理论熊市底部，<code>1</code> = 理论牛市顶部。</p>
 </section>
 <section>
   <h3>模型</h3>
@@ -86,7 +86,7 @@ WWI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
     noticeStale: (d) => `实时数据加载失败，当前显示截至 ${d} 的历史数据。`,
   },
   en: {
-    brand: 'Wolfy Wave Index',
+    brand: 'Block Pulse Index',
     brandSub: '', // 英文界面主名即英文，副标题隐藏
     tfDay: 'D',
     tfWeek: 'W',
@@ -97,15 +97,15 @@ WWI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
     log: 'Log',
     linear: 'Linear',
     priceLabel: 'BTC Price',
-    waveLabel: 'Wave Index',
+    waveLabel: 'Pulse Index',
     scaleTop: 'Top',
     scaleBottom: 'Bottom',
     halvingTag: (n, d) => `Halving #${n} (${d})`,
     bull: 'Bull',
     bear: 'Bear',
-    paneTitleName: 'Wolfy Wave Index',
+    paneTitleName: 'Block Pulse Index',
     statWave: 'WWI',
-    watermark: ['Wolfy Wave Index', 'Creator: WolfyXBT · @wolfyxbt'],
+    watermark: ['Block Pulse Index', 'Creator: HashAsh'],
     axisName: 'Block Height',
     legendOHLC: ['O', 'H', 'L', 'C'],
     ttBlock: (n) => `Block ${n}`,
@@ -114,20 +114,20 @@ WWI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
     ttPhase: 'Phase',
     titleLang: 'Language',
     titleTheme: 'Dark / light theme',
-    titleWaveStat: 'Wolfy Wave Index · 0 = bear bottom · 1 = bull top',
+    titleWaveStat: 'Block Pulse Index · 0 = bear bottom · 1 = bull top',
     titleTf: 'Bucket size: D = 144 blocks · W = 1,008 · M = 4,368',
     titleStyle: 'Chart type',
     titleScale: 'Price scale',
     titleAnnotHalving: 'Show/hide halving marks',
     titleAnnotBands: 'Show/hide bull/bear marks',
     titlePhase: 'Show/hide Wave Index pane',
-    titleWaveScale: 'Wave Index color scale',
+    titleWaveScale: 'Pulse Index color scale',
     titleAbout: 'Methodology',
-    aboutTitle: 'Wolfy Wave Index · Methodology',
+    aboutTitle: 'Block Pulse Index · Methodology',
     aboutHtml: `
 <section>
   <h3>Overview</h3>
-  <p>The Wolfy Wave Index (WWI) is a block-native Bitcoin cycle-position indicator. It uses no price, volume, or on-chain activity data — its only input is <b>block height</b>. The index oscillates between <code>0</code> and <code>1</code>: <code>0</code> = theoretical bear-market bottom, <code>1</code> = theoretical bull-market top.</p>
+  <p>The Block Pulse Index (BPI) is a block-native Bitcoin cycle-position indicator. It uses no price, volume, or on-chain activity data — its only input is <b>block height</b>. The index oscillates between <code>0</code> and <code>1</code>: <code>0</code> = theoretical bear-market bottom, <code>1</code> = theoretical bull-market top.</p>
 </section>
 <section>
   <h3>Model</h3>
