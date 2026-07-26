@@ -47,9 +47,9 @@ const TF_KEY = 'wolfy-tf';
 const ANNOT_HALVING_KEY = 'wolfy-annot-halving';
 const ANNOT_BANDS_KEY = 'wolfy-annot-bands';
 
-// 狼波色谱与 waveColor 定义在 config.js（与夹心填充/色标共用同一映射）
+// 脉冲色谱与 pulseColor 定义在 config.js（与夹心填充/色标共用同一映射）
 
-// 读数文字用的狼波色：与折线/色标同一色谱（同一数值同一颜色）；
+// 读数文字用的脉冲色：与折线/色标同一色谱（同一数值同一颜色）；
 // 浅色主题下压暗一档——色谱中段的黄绿在白底上几乎不可读
 function waveTextColor(v) {
   const c = waveColor(v);
@@ -93,15 +93,15 @@ async function init() {
     ...(halvingOn ? builtPhase.halvings : []),
     ...(bandsOn ? builtPhase.bands : []),
   ];
-  // 默认初始状态：标注开启、对数坐标、狼波着色、144 区块（日）；
+  // 默认初始状态：标注开启、对数坐标、脉冲着色、144 区块（日）；
   // 用户改过则从 localStorage 恢复（存的值非法时回落默认）
   const legacyAnnot = localStorage.getItem('wolfy-annot');
   let halvingOn = (localStorage.getItem(ANNOT_HALVING_KEY) ?? legacyAnnot) !== '0';
   let bandsOn = (localStorage.getItem(ANNOT_BANDS_KEY) ?? legacyAnnot) !== '0';
-  let phaseOn = true;      // 狼波指数副图窗格显示中
+  let phaseOn = true;      // 区块脉冲副图窗格显示中
   let logOn = localStorage.getItem(SCALE_KEY) !== 'linear';
   const savedStyle = localStorage.getItem(STYLE_KEY);
-  // 'candles' | 'line' | 'wave'，默认狼波着色
+  // 'candles' | 'line' | 'wave'，默认脉冲着色
   let chartStyle = ['candles', 'line', 'wave'].includes(savedStyle) ? savedStyle : 'wave';
   const savedTf = localStorage.getItem(TF_KEY);
   // 分桶粒度键：day=144区块 week=1,008区块 month=4,368区块
@@ -115,7 +115,7 @@ async function init() {
   let tipHeight = null;    // 当前链上高度（后台获取 + 轮询）
   let livePrice = null;    // 实时价格（轮询 Bitstamp ticker，仅供顶栏）
   let watermark = null;
-  let waveNow = null;      // 当前（今日）狼波指数值，十字线移开时回落显示
+  let waveNow = null;      // 当前（今日）区块脉冲指数值，十字线移开时回落显示
 
   const LWC = window.LightweightCharts;
   const { chart, series, lineSeries, waveLine, phaseSolid, phaseDashed } = createChartAndSeries($('chart'));
@@ -250,7 +250,7 @@ async function init() {
   chart.timeScale().subscribeVisibleLogicalRangeChange(renderBlockAxis);
   window.addEventListener('resize', renderBlockAxis);
 
-  // ── 狼波指数副图窗格的显隐 ──
+  // ── 区块脉冲副图窗格的显隐 ──
   // 隐藏 = 把两条指数系列移到主面板并设不可见（空面板被 LWC 自动移除，
   // 主图占满全高）；显示 = 移回面板 1 并恢复线性坐标、留白与 4:1 高度。
   // 开关按钮浮在窗格右上角，收起后退到图表右下角。
@@ -393,7 +393,7 @@ async function init() {
       pivots = computePivots(daily);
     }
     // 未来视界：延伸到「下下个」理论熊底，铺出完整的下一轮周期
-    //（未来的减半区块与狼波周期都是可直接推算的）
+    //（未来的减半区块与脉冲周期都是可直接推算的）
     const hNow = tipHeight ?? heightAt(dailyReal.at(-1).time + DAY);
     const horizonH = waveHorizonHeight(hNow);
     const bucket = BLOCK_BUCKETS[timeframe];
@@ -403,7 +403,7 @@ async function init() {
     meta = ann.meta;
     series.setData(bars);
     // 折线/着色系列取收盘价，时间键与 K 线完全一致（不向时间轴引入新点位）；
-    // 着色模式逐点上色：颜色 = 该处狼波指数（蓝 0 → 红 1）
+    // 着色模式逐点上色：颜色 = 该处区块脉冲指数（蓝 0 → 红 1）
     const realBars = bars.filter((b) => b.open !== undefined);
     lineSeries.setData(realBars.map((b) => ({ time: b.time, value: b.close })));
     waveLine.setData(realBars.map((b) => ({
@@ -412,7 +412,7 @@ async function init() {
       color: waveColor(waveIndexAt(b.time)),
     })));
     setSeriesData(bars);
-    // 狼波周期指数：高度的纯函数，按 bars 的桶起始高度采样。
+    // 区块脉冲指数：高度的纯函数，按 bars 的桶起始高度采样。
     // 实线 = 已发生，虚线 = 未来段；逐点上色 = 与着色模式同一色谱（蓝 0 → 红 1）
     const solidData = [];
     const dashedData = [];
@@ -484,7 +484,7 @@ async function init() {
       el.textContent = fmtPct(chg);
       el.className = `chg ${chg >= 0 ? 'up' : 'down'}`;
     }
-    // 顶栏狼波周期指数读数（颜色 = 该值的狼波色）+ 变化闪烁
+    // 顶栏区块脉冲周期指数读数（颜色 = 该值的脉冲着色）+ 变化闪烁
     const waveEl = $('stat-wave');
     const waveText = waveNow !== null ? waveNow.toFixed(3) : '—';
     waveEl.textContent = waveText;
@@ -518,7 +518,7 @@ async function init() {
 
   // ── 悬停信息卡：跟随光标，聚合该位置的全部读数 ──
   // 头部 = 区块高度 + ≈日期；行 = 色条 + 名称 + 右对齐数值
-  //（开/高/低/收/涨跌幅 + 狼波指数 + 周期阶段）；
+  //（开/高/低/收/涨跌幅 + 脉冲指数 + 周期阶段）；
   // 悬停在未来推演区（无价格数据）时只显示区块/指数/阶段
   const tooltip = $('tooltip');
   let mouseX = 0;
@@ -569,14 +569,14 @@ async function init() {
         rows += row(dirColor, lo, fmtPrice(bar.low));
         rows += row(dirColor, cl, fmtPrice(bar.close));
       } else {
-        // 折线/狼波着色：线本体取收盘价，只展示这一个价格
+        // 折线/脉冲着色：线本体取收盘价，只展示这一个价格
         rows += row(dirColor, t('ttPrice'), fmtPrice(bar.close));
       }
       if (chg !== null) rows += row(dirColor, t('ttChange'), fmtPct(chg));
     }
     const v = waveIndexAt(h);
     rows += row(waveTextColor(v), t('waveLabel'), v.toFixed(3));
-    // 周期阶段：狼波上行段 = 牛市，下行段 = 熊市
+    // 周期阶段：脉冲上行段 = 牛市，下行段 = 熊市
     const s = (((h + WAVE_BULL_HALF) % HALVING_INTERVAL) + HALVING_INTERVAL) % HALVING_INTERVAL;
     const isBull = s < 2 * WAVE_BULL_HALF;
     rows += row(
@@ -600,7 +600,7 @@ async function init() {
     }
     updateTooltip(param, hovered);
     updateLegendPrice(hovered ? hovered.close : null);
-    // 狼波指数读数跟随十字线（未来虚线段也有值），移开时回落到当前值
+    // 区块脉冲指数读数跟随十字线（未来虚线段也有值），移开时回落到当前值
     const w = param?.time !== undefined
       ? (param.seriesData.get(phaseSolid) ?? param.seriesData.get(phaseDashed))
       : null;
@@ -631,7 +631,7 @@ async function init() {
     fitAll();
   }));
 
-  // K线 / 折线 / 狼波着色切换：迁移标注宿主并保留缩放
+  // K线 / 折线 / 脉冲着色切换：迁移标注宿主并保留缩放
   const styleButtons = [...document.querySelectorAll('#style-group button')];
   const scaleButtons = [...document.querySelectorAll('#scale-group button')];
   // HTML 里写死的是默认态；恢复持久化设置后同步按钮高亮
