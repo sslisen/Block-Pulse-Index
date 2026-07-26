@@ -1,4 +1,4 @@
-// 轻量中英文字典。t(key, ...args) 取当前语言文案，函数型条目用于带参数拼接。
+B// 轻量中英文字典。t(key, ...args) 取当前语言文案，函数型条目用于带参数拼接。
 export const STRINGS = {
   zh: {
     brand: '区块脉冲指数',
@@ -58,15 +58,15 @@ export const STRINGS = {
   <p>对任意区块高度 <code>h</code>，先求其在周期内的相位 <code>s</code>：</p>
   <div class="about-formula">s = (h + 78,750) mod 210,000
 
-WWI(h) = s / 157,500　　　　　　　　　　 s &lt; 157,500（牛市段）
-WWI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
-  <p>牛市段以恒定速率每块 <code>+1/157,500</code> 从 0 升至 1，熊市段以每块 <code>−1/52,500</code> 从 1 降回 0；减半时刻恰为 <code>WWI = 0.5</code>。</p>
+BPI(h) = s / 157,500　　　　　　　　　　 s &lt; 157,500（牛市段）
+BPI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
+  <p>牛市段以恒定速率每块 <code>+1/157,500</code> 从 0 升至 1，熊市段以每块 <code>−1/52,500</code> 从 1 降回 0；减半时刻恰为 <code>BPI = 0.5</code>。</p>
 </section>
 <section>
   <h3>解读</h3>
   <ul>
     <li>上行段 = 模型牛市，下行段 = 模型熊市。读数须结合方向：同一数值每个周期出现两次（升、降各一次）。</li>
-    <li>数值即周期进度：牛市段中 WWI 为牛市已完成比例，熊市段中 <code>1 − WWI</code> 为熊市已完成比例。</li>
+    <li>数值即周期进度：牛市段中 BPI 为牛市已完成比例，熊市段中 <code>1 − BPI</code> 为熊市已完成比例。</li>
     <li>区块高度完全可预测（平均每 10 分钟一块），指数的未来路径可以精确推演——图中虚线段即未来推演。</li>
     <li>全站将指数值映射到蓝（0）→ 红（1）色谱：狼波着色模式与右侧色标同一映射。</li>
   </ul>
@@ -74,7 +74,7 @@ WWI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
 <section>
   <h3>特性与局限</h3>
   <ul>
-    <li><b>完全确定</b>：WWI 是区块高度的纯函数，无任何可调参数，任何人可独立复算。</li>
+    <li><b>完全确定</b>：BPI 是区块高度的纯函数，无任何可调参数，任何人可独立复算。</li>
     <li><b>无价格反馈</b>：指数刻画周期时点而非估值水平，不会因行情涨跌而移动。</li>
     <li><b>假设依赖</b>：有效性取决于「四年减半周期 + 牛三熊一结构」持续成立；市场结构性改变将削弱其现实解释力。</li>
   </ul>
@@ -104,7 +104,7 @@ WWI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
     bull: 'Bull',
     bear: 'Bear',
     paneTitleName: 'Block Pulse Index',
-    statWave: 'WWI',
+    statWave: 'BPI',
     watermark: ['Block Pulse Index', 'Creator: HashAsh'],
     axisName: 'Block Height',
     legendOHLC: ['O', 'H', 'L', 'C'],
@@ -143,15 +143,15 @@ WWI(h) = 1 − (s − 157,500) / 52,500　　s ≥ 157,500（熊市段）</div>
   <p>For any block height <code>h</code>, take its phase <code>s</code> within the cycle:</p>
   <div class="about-formula">s = (h + 78,750) mod 210,000
 
-WWI(h) = s / 157,500                  s &lt; 157,500  (bull)
-WWI(h) = 1 − (s − 157,500) / 52,500   s ≥ 157,500  (bear)</div>
+BPI(h) = s / 157,500                  s &lt; 157,500  (bull)
+BPI(h) = 1 − (s − 157,500) / 52,500   s ≥ 157,500  (bear)</div>
   <p>The index climbs 0 → 1 at a constant <code>+1/157,500</code> per block in the bull phase and falls 1 → 0 at <code>−1/52,500</code> per block in the bear phase; at every halving, <code>WWI = 0.5</code> exactly.</p>
 </section>
 <section>
   <h3>Interpretation</h3>
   <ul>
     <li>Rising segment = model bull market, falling segment = model bear market. Read the value together with its direction: every value occurs twice per cycle (once rising, once falling).</li>
-    <li>The value is cycle progress: in the bull phase WWI is the fraction of the bull completed; in the bear phase <code>1 − WWI</code> is the fraction of the bear completed.</li>
+    <li>The value is cycle progress: in the bull phase BPI is the fraction of the bull completed; in the bear phase <code>1 − WWI</code> is the fraction of the bear completed.</li>
     <li>Block height is fully predictable (≈ one block per 10 minutes), so the index's future path can be projected exactly — the dashed segment on the chart.</li>
     <li>Site-wide, values map onto a blue (0) → red (1) spectrum: Wave Color mode and the right-hand color scale share this mapping.</li>
   </ul>
@@ -159,7 +159,7 @@ WWI(h) = 1 − (s − 157,500) / 52,500   s ≥ 157,500  (bear)</div>
 <section>
   <h3>Properties &amp; Limitations</h3>
   <ul>
-    <li><b>Fully deterministic</b>: WWI is a pure function of block height with no tunable parameters — anyone can recompute it independently.</li>
+    <li><b>Fully deterministic</b>: BPI is a pure function of block height with no tunable parameters — anyone can recompute it independently.</li>
     <li><b>No price feedback</b>: it marks cycle position, not valuation, and never moves in response to price.</li>
     <li><b>Assumption-dependent</b>: its validity rests on the 4-year halving cycle and the 3 : 1 structure continuing to hold; a structural market change would weaken its explanatory power.</li>
   </ul>
