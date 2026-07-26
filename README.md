@@ -91,7 +91,7 @@ python3 -m http.server 8080
 本项目基于 **杀破狼 WolfyXBT** ([@wolfyxbt](https://x.com/wolfyxbt)) 的开源项目 [wolfy-wave-index](https://github.com/wolfyxbt/wolfy-wave-index) (MIT License) 进行重构与二次开发。
 
 ---
-<a id="Block-Pulse-Index"></a>
+
 # Block Pulse Index
 
 A Bitcoin four-year-cycle chart with **block height as its only x-axis**. The main pane shows the full BTC/USD history since 2011 (Pulse Color / candles / line), and the sub-pane shows the Block Pulse Index — a block-native cycle-position indicator. Bull/bear shading, halving lines and future projection are drawn directly on the chart; price and chain height update in real time.
